@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+	
+    <ImageView
+        android:id="@+id/headlinePic"
+        android:layout_width="fill_parent"
+		android:layout_height="324px"
+		android:layout_centerHorizontal="true"
+		android:scaleType="centerCrop"	  	
+        />
+    
+    <TextView
+        android:id="@+id/headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:paddingTop="326px"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="HEADLINE"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/date"
+        android:padding="5dp"
+        android:text="DESC" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/headline"
+        android:text="date"
+        android:paddingLeft="5dp"
+        android:textSize="10dp" />
+
+    <TextView
+        android:id="@+id/seeMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/description"
+        android:text="See more..."
+        android:paddingLeft="5dp"
+        android:paddingBottom="5dp"
+        android:textSize="16sp" />
+
+</RelativeLayout>

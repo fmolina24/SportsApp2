@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/awayTeam_single"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Away"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/homeTeam_single"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Home"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/status_single"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/homeScore_single"
+        android:layout_centerHorizontal="true"
+        android:text="Status" />
+
+    <TextView
+        android:id="@+id/tv_single"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/status_single"
+        android:layout_centerHorizontal="true"
+        android:text="TV" />
+
+    <TextView
+        android:id="@+id/awayScore_single"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/awayLogo_single"
+        android:layout_below="@+id/awayTeam_single"
+        android:text="0"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/time_single"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/tv_single"
+        android:layout_below="@+id/state_single"
+        android:text="time" />
+
+    <TextView
+        android:id="@+id/state_single"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/status_single"
+        android:layout_alignParentTop="true"
+        android:text="State" />
+
+    <TextView
+        android:id="@+id/homeScore_single"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/homeLogo_single"
+        android:layout_below="@+id/homeTeam_single"
+        android:text="0"
+        android:textSize="40sp" />
+
+    <ImageView
+        android:id="@+id/homeLogo_single"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/status_single"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/awayLogo_single"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/status_single"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_launcher" />
+
+</RelativeLayout>
