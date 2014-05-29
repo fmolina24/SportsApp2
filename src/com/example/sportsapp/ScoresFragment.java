@@ -50,12 +50,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
+import com.fedorvlasov.lazylist.ImageLoader;
 import com.model.sportsapp.Game;
 import com.webileapps.navdrawer.R;
 
 public class ScoresFragment extends SherlockListFragment{
 
 	private static final String ARG_POSITION = "position";
+	ImageLoader imageLoader=new ImageLoader(getActivity());
 	
 	private List<Game> myList;
 	String sport="";
@@ -181,6 +183,10 @@ public class ScoresFragment extends SherlockListFragment{
 			homeLogo = (ImageView) convertView.getTag(R.id.homeLogo);
 			awayLogo = (ImageView) convertView.getTag(R.id.awayLogo);
 			
+			if((myList.get(position).getAwayLogo()!=null) && (myList.get(position).getHomeLogo()!=null)){
+				imageLoader.DisplayImage(myList.get(position).getAwayLogo(), awayLogo);
+				imageLoader.DisplayImage(myList.get(position).getHomeLogo(), homeLogo);
+			}
 	
 			
 			home.setText(myList.get(position).getHomeTeam());
