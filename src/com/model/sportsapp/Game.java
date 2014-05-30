@@ -8,6 +8,8 @@ public class Game implements Serializable {
 	private int gameid;
 	private String homeTeam;
 	private String awayTeam;
+	private String homeCity;
+	private String awayCity;
 	private Integer homeScore;
 	private Integer awayScore;
 	private String status;
@@ -19,12 +21,14 @@ public class Game implements Serializable {
 	private String state;
 	
 	
-	public Game(int gameid,String homeTeam,String awayTeam,Integer homeScore,
+	public Game(int gameid,String homeTeam,String awayTeam,String homeCity,String awayCity,Integer homeScore,
 			Integer awayScore,String status,Date time,String homeLogo,
 			String awayLogo,String tv,String timeElapsed,String state){
 		this.gameid = gameid;
 		this.homeTeam = homeTeam;
 		this.awayTeam = awayTeam;
+		this.homeCity = homeCity;
+		this.awayCity = awayCity;
 		this.homeScore = homeScore;
 		this.awayScore = awayScore;
 		this.status = status;
@@ -34,6 +38,7 @@ public class Game implements Serializable {
 		this.tv = tv;
 		this.timeElapsed = timeElapsed;
 		this.state = state;
+		
 	}
 	
 
@@ -154,6 +159,26 @@ public class Game implements Serializable {
 
 	public void setTv(String tv) {
 		this.tv = tv;
+	}
+
+
+	public String getHomeCity() {
+		return homeCity;
+	}
+
+
+	public void setHomeCity(String homeCity) {
+		this.homeCity = homeCity;
+	}
+
+
+	public String getAwayCity() {
+		return awayCity;
+	}
+
+
+	public void setAwayCity(String awayCity) {
+		this.awayCity = awayCity;
 	}
 	
 	

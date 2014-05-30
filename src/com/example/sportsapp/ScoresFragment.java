@@ -271,6 +271,10 @@ public class ScoresFragment extends SherlockListFragment{
 					JSONObject homeTeam = entry.getJSONObject("home-team");
 					JSONObject awayTeam = entry.getJSONObject("visiting-team");
 					
+					//CITY NAMES
+					String homeCity = homeTeam.getString("display_name");
+					String awayCity = awayTeam.getString("display_name");
+					
 					//GET NICKNAMES
 					String homeNickname = homeTeam.getString("nickname");
 					String awayNickname = awayTeam.getString("nickname");
@@ -318,7 +322,7 @@ public class ScoresFragment extends SherlockListFragment{
 					
 
 					
-					result.add(new Game(id,homeNickname,awayNickname,
+					result.add(new Game(id,homeNickname,awayNickname,homeCity,awayCity,
 							homeScore,awayScore,
 							status,gameDate,homeLogo,awayLogo,tv,timeElapsed,state));
 				}
