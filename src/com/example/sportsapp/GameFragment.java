@@ -1,18 +1,34 @@
 package com.example.sportsapp;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import twitter4j.Query;
+import twitter4j.QueryResult;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
+
 import com.actionbarsherlock.app.SherlockFragment;
 import com.fedorvlasov.lazylist.ImageLoader;
 import com.model.sportsapp.Game;
+import com.model.sportsapp.Tweet;
 import com.webileapps.navdrawer.R;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.graphics.Matrix;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
 
@@ -63,13 +79,234 @@ public class GameFragment extends SherlockFragment{
 		state.setText(game.getState());
 		time.setText(game.getTimeElapsed());
 		
+		if(! game.getSport().equalsIgnoreCase("MLB")){
 		imageLoader.DisplayImage(game.getAwayLogo().replace("50x33", "90x60"), awayLogo);
 		imageLoader.DisplayImage(game.getHomeLogo().replace("50x33", "90x60"), homeLogo);
+		}
+		
+		else{
+			String homeTeam = game.getHomeTeam();
+			String awayTeam = game.getAwayTeam();
+			
+			if(homeTeam.equalsIgnoreCase("angels"))
+				homeLogo.setImageResource(R.drawable.angels);
+			else if (homeTeam.equalsIgnoreCase("angels"))
+				homeLogo.setImageResource(R.drawable.astros);
+			else if (homeTeam.equalsIgnoreCase("athletics"))
+				homeLogo.setImageResource(R.drawable.athletics);
+			else if (homeTeam.equalsIgnoreCase("blue jays"))
+				homeLogo.setImageResource(R.drawable.blue_jays);
+			else if (homeTeam.equalsIgnoreCase("braves"))
+				homeLogo.setImageResource(R.drawable.braves);
+			else if (homeTeam.equalsIgnoreCase("brewers"))
+				homeLogo.setImageResource(R.drawable.brewers);
+			else if (homeTeam.equalsIgnoreCase("cardinals"))
+				homeLogo.setImageResource(R.drawable.cardinals);
+			else if (homeTeam.equalsIgnoreCase("cubs"))
+				homeLogo.setImageResource(R.drawable.cubs);
+			else if (homeTeam.equalsIgnoreCase("diamondbacks"))
+				homeLogo.setImageResource(R.drawable.diamondbacks);
+			else if (homeTeam.equalsIgnoreCase("dodgers"))
+				homeLogo.setImageResource(R.drawable.dodgers);
+			else if (homeTeam.equalsIgnoreCase("giants"))
+				homeLogo.setImageResource(R.drawable.giants);
+			else if (homeTeam.equalsIgnoreCase("indians"))
+				homeLogo.setImageResource(R.drawable.indians);
+			else if (homeTeam.equalsIgnoreCase("mariners"))
+				homeLogo.setImageResource(R.drawable.marlins);
+			else if (homeTeam.equalsIgnoreCase("mets"))
+				homeLogo.setImageResource(R.drawable.mets);
+			else if (homeTeam.equalsIgnoreCase("nationals"))
+				homeLogo.setImageResource(R.drawable.nationals);
+			else if (homeTeam.equalsIgnoreCase("orioles"))
+				homeLogo.setImageResource(R.drawable.orioles);
+			else if (homeTeam.equalsIgnoreCase("padres"))
+				homeLogo.setImageResource(R.drawable.padres);
+			else if (homeTeam.equalsIgnoreCase("phillies"))
+				homeLogo.setImageResource(R.drawable.phillies);
+			else if (homeTeam.equalsIgnoreCase("pirates"))
+				homeLogo.setImageResource(R.drawable.pirates);
+			else if (homeTeam.equalsIgnoreCase("rangers"))
+				homeLogo.setImageResource(R.drawable.rangers);
+			else if (homeTeam.equalsIgnoreCase("rays"))
+				homeLogo.setImageResource(R.drawable.rays);
+			else if (homeTeam.equalsIgnoreCase("red sox"))
+				homeLogo.setImageResource(R.drawable.red_sox);
+			else if (homeTeam.equalsIgnoreCase("reds"))
+				homeLogo.setImageResource(R.drawable.reds);
+			else if (homeTeam.equalsIgnoreCase("rockies"))
+				homeLogo.setImageResource(R.drawable.rockies);
+			else if (homeTeam.equalsIgnoreCase("royals"))
+				homeLogo.setImageResource(R.drawable.royals);
+			else if (homeTeam.equalsIgnoreCase("tigers"))
+				homeLogo.setImageResource(R.drawable.tigers);
+			else if (homeTeam.equalsIgnoreCase("twins"))
+				homeLogo.setImageResource(R.drawable.twins);
+			else if (homeTeam.equalsIgnoreCase("white sox"))
+				homeLogo.setImageResource(R.drawable.white_sox);
+			else if (homeTeam.equalsIgnoreCase("yankees"))
+				homeLogo.setImageResource(R.drawable.yankees);
+			
+			
+			if(awayTeam.equalsIgnoreCase("angels"))
+				awayLogo.setImageResource(R.drawable.angels);
+			else if (awayTeam.equalsIgnoreCase("angels"))
+				awayLogo.setImageResource(R.drawable.astros);
+			else if (awayTeam.equalsIgnoreCase("athletics"))
+				awayLogo.setImageResource(R.drawable.athletics);
+			else if (awayTeam.equalsIgnoreCase("blue jays"))
+				awayLogo.setImageResource(R.drawable.blue_jays);
+			else if (awayTeam.equalsIgnoreCase("braves"))
+				awayLogo.setImageResource(R.drawable.braves);
+			else if (awayTeam.equalsIgnoreCase("brewers"))
+				awayLogo.setImageResource(R.drawable.brewers);
+			else if (awayTeam.equalsIgnoreCase("cardinals"))
+				awayLogo.setImageResource(R.drawable.cardinals);
+			else if (awayTeam.equalsIgnoreCase("cubs"))
+				awayLogo.setImageResource(R.drawable.cubs);
+			else if (awayTeam.equalsIgnoreCase("diamondbacks"))
+				awayLogo.setImageResource(R.drawable.diamondbacks);
+			else if (awayTeam.equalsIgnoreCase("dodgers"))
+				awayLogo.setImageResource(R.drawable.dodgers);
+			else if (awayTeam.equalsIgnoreCase("giants"))
+				awayLogo.setImageResource(R.drawable.giants);
+			else if (awayTeam.equalsIgnoreCase("indians"))
+				awayLogo.setImageResource(R.drawable.indians);
+			else if (awayTeam.equalsIgnoreCase("mariners"))
+				awayLogo.setImageResource(R.drawable.marlins);
+			else if (awayTeam.equalsIgnoreCase("mets"))
+				awayLogo.setImageResource(R.drawable.mets);
+			else if (awayTeam.equalsIgnoreCase("nationals"))
+				awayLogo.setImageResource(R.drawable.nationals);
+			else if (awayTeam.equalsIgnoreCase("orioles"))
+				awayLogo.setImageResource(R.drawable.orioles);
+			else if (awayTeam.equalsIgnoreCase("padres"))
+				awayLogo.setImageResource(R.drawable.padres);
+			else if (awayTeam.equalsIgnoreCase("phillies"))
+				awayLogo.setImageResource(R.drawable.phillies);
+			else if (awayTeam.equalsIgnoreCase("pirates"))
+				awayLogo.setImageResource(R.drawable.pirates);
+			else if (awayTeam.equalsIgnoreCase("rangers"))
+				awayLogo.setImageResource(R.drawable.rangers);
+			else if (awayTeam.equalsIgnoreCase("rays"))
+				awayLogo.setImageResource(R.drawable.rays);
+			else if (awayTeam.equalsIgnoreCase("red sox"))
+				awayLogo.setImageResource(R.drawable.red_sox);
+			else if (awayTeam.equalsIgnoreCase("reds"))
+				awayLogo.setImageResource(R.drawable.reds);
+			else if (awayTeam.equalsIgnoreCase("rockies"))
+				awayLogo.setImageResource(R.drawable.rockies);
+			else if (awayTeam.equalsIgnoreCase("royals"))
+				awayLogo.setImageResource(R.drawable.royals);
+			else if (awayTeam.equalsIgnoreCase("tigers"))
+				awayLogo.setImageResource(R.drawable.tigers);
+			else if (awayTeam.equalsIgnoreCase("twins"))
+				awayLogo.setImageResource(R.drawable.twins);
+			else if (awayTeam.equalsIgnoreCase("white sox"))
+				awayLogo.setImageResource(R.drawable.white_sox);
+			else if (awayTeam.equalsIgnoreCase("yankees"))
+				awayLogo.setImageResource(R.drawable.yankees);
+			
+		}
 		status.setText(game.getStatus());
 		
 		Log.i("info", "done with gamefrag");
+		new TwitterTask().execute();
 		return gameView;
 		
+	}
+	
+	private class TwitterTask extends AsyncTask<Void, Void, ArrayList<Tweet>> {
+
+
+		@Override
+		protected ArrayList<Tweet> doInBackground(Void... params) {
+			ArrayList<Tweet> myList = new ArrayList<Tweet>();
+			ConfigurationBuilder cb = new ConfigurationBuilder();
+		    cb.setDebugEnabled(true)
+		          .setOAuthConsumerKey("6EIUm62HmNvRxFQZThW23U2CE")
+		          .setOAuthConsumerSecret("coewXjaiYHmEK0hIBk3dewxSPcAdrFzWJifyL6dDfB7cVmKfmA")
+		          .setOAuthAccessToken("393532597-7sDY8DOM6VQiSiLgX3brFtaJyzCdpwxJNWCLYnnh")
+		          .setOAuthAccessTokenSecret("pTagsBX3dWZg7vqD9B2eYBcO6wscnSIDgro0Nnq88Kvu6");
+		    TwitterFactory tf = new TwitterFactory(cb.build());
+		    Twitter twitter = tf.getInstance();
+		    String home = game.getHomeCity()+" " + game.getHomeTeam();
+		    String away = game.getAwayCity()+" " + game.getAwayTeam();
+		        try {
+		            Query query = new Query("(" +home+")" + " OR " + "(" + away + ")");
+		            QueryResult result;
+		            result = twitter.search(query);
+		            List<twitter4j.Status> tweets = result.getTweets();
+		            
+		            for (twitter4j.Status tweet : tweets) {
+		            	myList.add(new Tweet(tweet.getUser().getScreenName(),tweet.getText(),tweet.getUser().getBiggerProfileImageURL()));
+		                Log.i("Tweet","@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
+		            }
+		            
+		            
+		            
+		            return myList;
+
+		        } catch (TwitterException te) {
+		            te.printStackTrace();
+		            System.out.println("Failed to search tweets: " + te.getMessage());
+		        }
+		
+			
+			
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(ArrayList<Tweet> result) {
+			ListView list = (ListView) getActivity().findViewById(R.id.tweetList);
+			TwitterAdapter adp = new TwitterAdapter(getActivity(),R.layout.twitteradapt,result);
+			list.setAdapter(adp);
+		}
+		
+
+ 
+		
+	}
+	public class TwitterAdapter extends ArrayAdapter{
+		private Context context;
+		ArrayList<Tweet> myList = new ArrayList<Tweet>();
+
+		public TwitterAdapter(Context context, int resource, ArrayList<Tweet> result) {
+			super(context, resource, result);
+			myList = result;
+			this.context = context;
+		}
+		
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			ListView list;
+			TextView user;
+			TextView tweet;
+			ImageView userImg;
+			
+			
+			//reuse converView if you can to speed up scrolling on listview
+			if(convertView == null){
+				//inflate the listview
+				LayoutInflater inflator = ((Activity)context).getLayoutInflater();
+				convertView = inflator.inflate(R.layout.twitteradapt, parent, false);
+			}
+			user = (TextView) convertView.findViewById(R.id.userTweet);
+			tweet = (TextView) convertView.findViewById(R.id.tweet);
+			userImg = (ImageView) convertView.findViewById(R.id.userImg);
+			
+			user.setText("@" + myList.get(position).getUser());
+			tweet.setText(myList.get(position).getTweet());
+			imageLoader.DisplayImage(myList.get(position).getUserImgUrl(), userImg);
+			
+			
+			return convertView;
+		}
+		public void setItemList(ArrayList<Tweet> itemList) {
+			this.myList = itemList;
+		}
+
 	}
 
 

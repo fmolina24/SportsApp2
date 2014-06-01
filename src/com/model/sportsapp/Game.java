@@ -5,9 +5,15 @@ import java.util.Date;
 
 
 public class Game implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int gameid;
 	private String homeTeam;
 	private String awayTeam;
+	private String homeCity;
+	private String awayCity;
 	private Integer homeScore;
 	private Integer awayScore;
 	private String status;
@@ -17,14 +23,17 @@ public class Game implements Serializable {
 	private String tv;
 	private String timeElapsed;
 	private String state;
+	private String sport;
 	
 	
-	public Game(int gameid,String homeTeam,String awayTeam,Integer homeScore,
+	public Game(int gameid,String homeTeam,String awayTeam,String homeCity,String awayCity,Integer homeScore,
 			Integer awayScore,String status,Date time,String homeLogo,
 			String awayLogo,String tv,String timeElapsed,String state){
 		this.gameid = gameid;
 		this.homeTeam = homeTeam;
 		this.awayTeam = awayTeam;
+		this.setHomeCity(homeCity);
+		this.setAwayCity(awayCity);
 		this.homeScore = homeScore;
 		this.awayScore = awayScore;
 		this.status = status;
@@ -34,6 +43,27 @@ public class Game implements Serializable {
 		this.tv = tv;
 		this.timeElapsed = timeElapsed;
 		this.state = state;
+	}
+	
+	
+	public Game(String sport, int gameid,String homeTeam,String awayTeam,String homeCity,String awayCity,Integer homeScore,
+			Integer awayScore,String status,Date time,String homeLogo,
+			String awayLogo,String tv,String timeElapsed,String state){
+		this.gameid = gameid;
+		this.homeTeam = homeTeam;
+		this.awayTeam = awayTeam;
+		this.setHomeCity(homeCity);
+		this.setAwayCity(awayCity);
+		this.homeScore = homeScore;
+		this.awayScore = awayScore;
+		this.status = status;
+		this.time = time;
+		this.homeLogo = homeLogo;
+		this.awayLogo = awayLogo;
+		this.tv = tv;
+		this.timeElapsed = timeElapsed;
+		this.state = state;
+		this.sport = sport;
 	}
 	
 
@@ -154,6 +184,36 @@ public class Game implements Serializable {
 
 	public void setTv(String tv) {
 		this.tv = tv;
+	}
+
+
+	public String getSport() {
+		return sport;
+	}
+
+
+	public void setSport(String sport) {
+		this.sport = sport;
+	}
+
+
+	public String getHomeCity() {
+		return homeCity;
+	}
+
+
+	public void setHomeCity(String homeCity) {
+		this.homeCity = homeCity;
+	}
+
+
+	public String getAwayCity() {
+		return awayCity;
+	}
+
+
+	public void setAwayCity(String awayCity) {
+		this.awayCity = awayCity;
 	}
 	
 	
