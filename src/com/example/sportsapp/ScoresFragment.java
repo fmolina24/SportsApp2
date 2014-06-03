@@ -139,6 +139,10 @@ public class ScoresFragment extends SherlockListFragment{
 			if (null != mClient)
 				mClient.close();
 			setListAdapter(new MyAdapter(getActivity(),R.layout.row,result));
+			ListView listView = getListView();
+			
+			
+			
 		}
 	}
 	class MyAdapter extends ArrayAdapter{
