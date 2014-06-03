@@ -139,6 +139,10 @@ public class ScoresFragment extends SherlockListFragment{
 			if (null != mClient)
 				mClient.close();
 			setListAdapter(new MyAdapter(getActivity(),R.layout.row,result));
+			ListView listView = getListView();
+			
+			
+			
 		}
 	}
 	class MyAdapter extends ArrayAdapter{
@@ -187,6 +191,15 @@ public class ScoresFragment extends SherlockListFragment{
 				imageLoader.DisplayImage(myList.get(position).getAwayLogo(), awayLogo);
 				imageLoader.DisplayImage(myList.get(position).getHomeLogo(), homeLogo);
 			}
+			
+			if(sport.equalsIgnoreCase("MLB")){
+				
+				MLBLogoFinder mlbLogoFinder = new MLBLogoFinder();
+				
+				mlbLogoFinder.setLogo(homeLogo, myList.get(position).getHomeTeam());
+				mlbLogoFinder.setLogo(awayLogo, myList.get(position).getAwayTeam());
+
+			}
 	
 			
 			home.setText(myList.get(position).getHomeTeam());
@@ -227,6 +240,8 @@ public class ScoresFragment extends SherlockListFragment{
 						JSONResponse).nextValue();
 				Log.i("info", "after response object");
 				
+				String sportName = responseObject.getString("sport");
+				
 		
 				// Extract value of "list" key -- a List
 				JSONArray games = responseObject
@@ -239,18 +254,18 @@ public class ScoresFragment extends SherlockListFragment{
 					String jsonPrettyPrintString = game.toString(4);
 		            Log.i("game", jsonPrettyPrintString);
 					JSONObject entry = game.getJSONObject("ticker-entry");
-					
+
 					//GET GAME ID
 					int id = entry.getInt("gamecode");
-					
+
 					//GET GAMESTATE OBJECT
 					JSONObject gamestate = entry.getJSONObject("gamestate");
-					
+
 					//GET GAME STATUS
 					String status = gamestate.getString("status");
-					
-					
-					
+
+
+
 					//GET GAME TIME
 					String time = gamestate.getString("gametime");
 					String date = gamestate.getString("gamedate");
@@ -262,19 +277,23 @@ public class ScoresFragment extends SherlockListFragment{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
+
 					//GET TV BROADCAST
 					String tv = gamestate.getString("tv");
-					
-					
+
+
 					//GET HOME AND AWAY TEAM OBJECTS
 					JSONObject homeTeam = entry.getJSONObject("home-team");
 					JSONObject awayTeam = entry.getJSONObject("visiting-team");
-					
+
+					//CITY NAMES
+					String homeCity = homeTeam.getString("display_name");
+					String awayCity = awayTeam.getString("display_name");
+
 					//GET NICKNAMES
 					String homeNickname = homeTeam.getString("nickname");
 					String awayNickname = awayTeam.getString("nickname");
-					
+
 					//GET TEAM LOGOS
 					String homeLogo =null;
 					String awayLogo = null;
@@ -282,16 +301,16 @@ public class ScoresFragment extends SherlockListFragment{
 						JSONObject homeLogoObject = homeTeam.getJSONObject("team-logo");
 						homeLogo = homeLogoObject.getString("link");
 						Log.i("info", homeLogo);
-						
+
 						JSONObject awayLogoObject = awayTeam.getJSONObject("team-logo");
 						awayLogo = awayLogoObject.getString("link");
 						Log.i("info", awayLogo);
 					}
-					
+
 					Integer homeScore;
 					Integer awayScore;
-					
-					
+
+
 					//GET SCORES
 					if(!status.equalsIgnoreCase("Pre-Game")){
 						JSONArray homeScoreArr = homeTeam.getJSONArray("score");
@@ -304,7 +323,7 @@ public class ScoresFragment extends SherlockListFragment{
 						homeScore =null;
 						awayScore = null;
 					}
-					
+
 					//GET timeElapsed and state if not pre-game
 					String timeElapsed = "";
 					String state = "";
@@ -312,13 +331,13 @@ public class ScoresFragment extends SherlockListFragment{
 						timeElapsed = gamestate.getString("display_status1");
 						state = gamestate.getString("display_status2");
 					}
-						
+
 					Log.i("state", timeElapsed);
 					Log.i("state", state);
 					
 
 					
-					result.add(new Game(id,homeNickname,awayNickname,
+					result.add(new Game(sportName, id,homeNickname,awayNickname,homeCity,awayCity,
 							homeScore,awayScore,
 							status,gameDate,homeLogo,awayLogo,tv,timeElapsed,state));
 				}

@@ -11,3 +11,5 @@ local.properties
 
 # Eclipse project files
 .classpath
+
+src/com/example/sportsapp/DatePickerFragment.java
