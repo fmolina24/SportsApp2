@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 	
     <ImageView
         android:id="@+id/headlinePic"
         android:layout_width="fill_parent"
-		android:layout_height="324px"
+		android:layout_height="220dp"
 		android:layout_centerHorizontal="true"
 		android:scaleType="centerCrop"	  	
         />
@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:paddingTop="326px"
+        android:paddingTop="225dp"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:text="HEADLINE"
