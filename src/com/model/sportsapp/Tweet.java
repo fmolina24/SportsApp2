@@ -4,13 +4,13 @@ public class Tweet {
 	private String user;
 	private String tweet;
 	private String userImgUrl;
+
 	
 	public Tweet(String user,String tweet,String userImgUrl){
 		this.user = user;
 		this.tweet = tweet;
 		this.userImgUrl = userImgUrl;
-		
-		
+
 	}
 
 	public String getUser() {
@@ -36,6 +36,6 @@ public class Tweet {
 	public void setUserImgUrl(String userImgUrl) {
 		this.userImgUrl = userImgUrl;
 	}
-	
 
 }
+

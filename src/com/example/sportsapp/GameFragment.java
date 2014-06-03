@@ -79,8 +79,18 @@ public class GameFragment extends SherlockFragment{
 		state.setText(game.getState());
 		time.setText(game.getTimeElapsed());
 		
+		if(! game.getSport().equalsIgnoreCase("MLB")){
 		imageLoader.DisplayImage(game.getAwayLogo().replace("50x33", "90x60"), awayLogo);
 		imageLoader.DisplayImage(game.getHomeLogo().replace("50x33", "90x60"), homeLogo);
+		}
+		
+		else{
+
+			MLBLogoFinder mlbLogoFinder = new MLBLogoFinder();
+			mlbLogoFinder.setLogo(homeLogo, game.getHomeTeam());
+			mlbLogoFinder.setLogo(awayLogo, game.getAwayTeam());
+			
+		}
 		status.setText(game.getStatus());
 		
 		Log.i("info", "done with gamefrag");
