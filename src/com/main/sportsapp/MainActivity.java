@@ -1,6 +1,6 @@
 
 
-package com.example.sportsapp;
+package com.main.sportsapp;
 
 import android.app.FragmentTransaction;
 import android.content.res.Configuration;

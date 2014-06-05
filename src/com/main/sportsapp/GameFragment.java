@@ -1,4 +1,4 @@
-package com.example.sportsapp;
+package com.main.sportsapp;
 
 import java.util.ArrayList;
 import java.util.List;
