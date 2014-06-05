@@ -2,7 +2,6 @@ package com.main.sportsapp;
 
 import android.widget.ImageView;
 
-import com.webileapps.navdrawer.R;
 
 public class MLBLogoFinder {
 	
@@ -12,7 +11,7 @@ public class MLBLogoFinder {
 		
 		if(teamName.equalsIgnoreCase("angels"))
 			teamLogo.setImageResource(R.drawable.angels);
-		else if (teamName.equalsIgnoreCase("angels"))
+		else if (teamName.equalsIgnoreCase("astros"))
 			teamLogo.setImageResource(R.drawable.astros);
 		else if (teamName.equalsIgnoreCase("athletics"))
 			teamLogo.setImageResource(R.drawable.athletics);

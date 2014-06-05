@@ -16,7 +16,6 @@ import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.model.sportsapp.Game;
-import com.webileapps.navdrawer.R;
 
 public class MainActivity extends SherlockFragmentActivity {
 	DrawerLayout mDrawerLayout;

@@ -37,7 +37,6 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.fedorvlasov.lazylist.ImageLoader;
 import com.model.sportsapp.Game;
-import com.webileapps.navdrawer.R;
 
 public class ScoresFragment extends SherlockListFragment{
 

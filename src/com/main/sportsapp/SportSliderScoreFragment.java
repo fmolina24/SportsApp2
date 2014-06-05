@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.astuetz.PagerSlidingTabStrip;
-import com.webileapps.navdrawer.R;
 
 public class SportSliderScoreFragment extends Fragment {
 	public static final String PREFS_NAME = "gitSportsettings";

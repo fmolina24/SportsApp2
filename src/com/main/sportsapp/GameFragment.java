@@ -14,7 +14,6 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.fedorvlasov.lazylist.ImageLoader;
 import com.model.sportsapp.Game;
 import com.model.sportsapp.Tweet;
-import com.webileapps.navdrawer.R;
 
 import android.app.Activity;
 import android.app.Fragment;

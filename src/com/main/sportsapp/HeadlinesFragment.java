@@ -35,7 +35,6 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.fedorvlasov.lazylist.ImageLoader;
 import com.model.sportsapp.Headline;
-import com.webileapps.navdrawer.R;
 
 
 public class HeadlinesFragment extends SherlockListFragment {
