@@ -185,6 +185,7 @@ public class ScoresFragment extends SherlockListFragment{
 				mlbLogoFinder.setLogo(awayLogo, myList.get(position).getAwayTeam());
 
 			}
+			
 	
 			
 			home.setText(myList.get(position).getHomeTeam());

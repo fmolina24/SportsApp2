@@ -180,7 +180,7 @@ public class MainActivity extends SherlockFragmentActivity {
 		
 		getSupportFragmentManager()
 		.beginTransaction()
-		.replace(R.id.content,frag).commit();
+		.replace(R.id.content,frag).addToBackStack("game").commit();
 		
 	}
 
