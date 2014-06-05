@@ -1,20 +1,5 @@
-/*
- * Copyright (C) 2013 Andreas Stuetz <andreas.stuetz@gmail.com>
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
-package com.example.sportsapp;
+package com.main.sportsapp;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -50,12 +35,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
+import com.fedorvlasov.lazylist.ImageLoader;
 import com.model.sportsapp.Game;
 import com.webileapps.navdrawer.R;
 
 public class ScoresFragment extends SherlockListFragment{
 
 	private static final String ARG_POSITION = "position";
+	ImageLoader imageLoader=new ImageLoader(getActivity());
 	
 	private List<Game> myList;
 	String sport="";
@@ -137,6 +124,10 @@ public class ScoresFragment extends SherlockListFragment{
 			if (null != mClient)
 				mClient.close();
 			setListAdapter(new MyAdapter(getActivity(),R.layout.row,result));
+			ListView listView = getListView();
+			
+			
+			
 		}
 	}
 	class MyAdapter extends ArrayAdapter{
@@ -181,6 +172,19 @@ public class ScoresFragment extends SherlockListFragment{
 			homeLogo = (ImageView) convertView.getTag(R.id.homeLogo);
 			awayLogo = (ImageView) convertView.getTag(R.id.awayLogo);
 			
+			if((myList.get(position).getAwayLogo()!=null) && (myList.get(position).getHomeLogo()!=null)){
+				imageLoader.DisplayImage(myList.get(position).getAwayLogo(), awayLogo);
+				imageLoader.DisplayImage(myList.get(position).getHomeLogo(), homeLogo);
+			}
+			
+			if(sport.equalsIgnoreCase("MLB")){
+				
+				MLBLogoFinder mlbLogoFinder = new MLBLogoFinder();
+				
+				mlbLogoFinder.setLogo(homeLogo, myList.get(position).getHomeTeam());
+				mlbLogoFinder.setLogo(awayLogo, myList.get(position).getAwayTeam());
+
+			}
 	
 			
 			home.setText(myList.get(position).getHomeTeam());
@@ -221,6 +225,8 @@ public class ScoresFragment extends SherlockListFragment{
 						JSONResponse).nextValue();
 				Log.i("info", "after response object");
 				
+				String sportName = responseObject.getString("sport");
+				
 		
 				// Extract value of "list" key -- a List
 				JSONArray games = responseObject
@@ -233,18 +239,18 @@ public class ScoresFragment extends SherlockListFragment{
 					String jsonPrettyPrintString = game.toString(4);
 		            Log.i("game", jsonPrettyPrintString);
 					JSONObject entry = game.getJSONObject("ticker-entry");
-					
+
 					//GET GAME ID
 					int id = entry.getInt("gamecode");
-					
+
 					//GET GAMESTATE OBJECT
 					JSONObject gamestate = entry.getJSONObject("gamestate");
-					
+
 					//GET GAME STATUS
 					String status = gamestate.getString("status");
-					
-					
-					
+
+
+
 					//GET GAME TIME
 					String time = gamestate.getString("gametime");
 					String date = gamestate.getString("gamedate");
@@ -256,19 +262,24 @@ public class ScoresFragment extends SherlockListFragment{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
+
 					//GET TV BROADCAST
 					String tv = gamestate.getString("tv");
-					
-					
+
+
 					//GET HOME AND AWAY TEAM OBJECTS
 					JSONObject homeTeam = entry.getJSONObject("home-team");
 					JSONObject awayTeam = entry.getJSONObject("visiting-team");
+
 					
+					//CITY NAMES
+					String homeCity = homeTeam.getString("display_name");
+					String awayCity = awayTeam.getString("display_name");
+
 					//GET NICKNAMES
 					String homeNickname = homeTeam.getString("nickname");
 					String awayNickname = awayTeam.getString("nickname");
-					
+
 					//GET TEAM LOGOS
 					String homeLogo =null;
 					String awayLogo = null;
@@ -276,16 +287,16 @@ public class ScoresFragment extends SherlockListFragment{
 						JSONObject homeLogoObject = homeTeam.getJSONObject("team-logo");
 						homeLogo = homeLogoObject.getString("link");
 						Log.i("info", homeLogo);
-						
+
 						JSONObject awayLogoObject = awayTeam.getJSONObject("team-logo");
 						awayLogo = awayLogoObject.getString("link");
 						Log.i("info", awayLogo);
 					}
-					
+
 					Integer homeScore;
 					Integer awayScore;
-					
-					
+
+
 					//GET SCORES
 					if(!status.equalsIgnoreCase("Pre-Game")){
 						JSONArray homeScoreArr = homeTeam.getJSONArray("score");
@@ -298,7 +309,7 @@ public class ScoresFragment extends SherlockListFragment{
 						homeScore =null;
 						awayScore = null;
 					}
-					
+
 					//GET timeElapsed and state if not pre-game
 					String timeElapsed = "";
 					String state = "";
@@ -306,13 +317,14 @@ public class ScoresFragment extends SherlockListFragment{
 						timeElapsed = gamestate.getString("display_status1");
 						state = gamestate.getString("display_status2");
 					}
-						
+
 					Log.i("state", timeElapsed);
 					Log.i("state", state);
 					
 
 					
-					result.add(new Game(id,homeNickname,awayNickname,
+					result.add(new Game(sportName, id,homeNickname,awayNickname,homeCity,awayCity,
+
 							homeScore,awayScore,
 							status,gameDate,homeLogo,awayLogo,tv,timeElapsed,state));
 				}
