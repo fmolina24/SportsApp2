@@ -39,7 +39,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:text="Small Text"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:autoLink="web" />
 
         </LinearLayout>
 

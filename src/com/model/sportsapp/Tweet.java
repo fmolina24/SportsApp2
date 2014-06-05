@@ -5,11 +5,11 @@ public class Tweet {
 	private String tweet;
 	private String userImgUrl;
 
+	
 	public Tweet(String user,String tweet,String userImgUrl){
 		this.user = user;
 		this.tweet = tweet;
 		this.userImgUrl = userImgUrl;
-
 
 	}
 
@@ -37,5 +37,5 @@ public class Tweet {
 		this.userImgUrl = userImgUrl;
 	}
 
-
 }
+
