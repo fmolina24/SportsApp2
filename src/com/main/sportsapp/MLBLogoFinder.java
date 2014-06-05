@@ -1,4 +1,4 @@
-package com.example.sportsapp;
+package com.main.sportsapp;
 
 import android.widget.ImageView;
 

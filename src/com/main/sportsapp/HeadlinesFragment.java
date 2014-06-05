@@ -1,4 +1,4 @@
-package com.example.sportsapp;
+package com.main.sportsapp;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

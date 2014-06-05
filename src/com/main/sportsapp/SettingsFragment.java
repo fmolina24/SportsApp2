@@ -1,4 +1,4 @@
-package com.example.sportsapp;
+package com.main.sportsapp;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.webileapps.navdrawer.R;
