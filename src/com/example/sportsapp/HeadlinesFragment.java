@@ -41,16 +41,45 @@ import com.webileapps.navdrawer.R;
 public class HeadlinesFragment extends SherlockListFragment {
 	private String sport ="";
 	private String league ="";
+	private static final String ARG_POSITION = "position";
+	private int position;
+	
+	
+	public static HeadlinesFragment newInstance(int position) {
+		HeadlinesFragment f = new HeadlinesFragment();
+		Bundle b = new Bundle();
+		b.putInt(ARG_POSITION, position);
+		f.setArguments(b);
+		return f;
+	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		if(getArguments()!=null){
-			sport = getArguments().getString("sport");
-			league = getArguments().getString("league");
+		position = getArguments().getInt(ARG_POSITION);
+		switch(position){
+			case 1:
+				sport="basketball";
+				league="nba";
+				break;
+			case 2:
+				sport="hockey";
+				league="nhl";
+				break;
+			case 3:
+				sport="baseball";
+				league="mlb";
+				break;
+			case 4:
+				sport="football";
+				league="nfl";
+				break;
+			default :
+				sport="";
+				league="";
+				break;
+			
 		}
-		
 		new HttpGetTask().execute();
 		
 	}

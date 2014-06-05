@@ -7,7 +7,15 @@
     <string-array name="titles">
         <item>Headlines</item>
         <item>Scores</item>
+        <item>Settings</item>
         
+    </string-array>
+    
+    <string-array name="sports">
+        <item>NBA</item>
+        <item>NHL</item>
+        <item>MLB</item>
+        <item>NFL</item>
     </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>
