@@ -102,17 +102,17 @@ public class HeadlinesFragment extends SherlockListFragment {
 			}else{
 				URL = "http://api.espn.com/v1/sports/"+sport+"/"+league+"/news/headlines?apikey="+apiKey;
 			}
-			Log.i("url", URL);
+			
 			
 			HttpGet request = new HttpGet(URL);
 			JSONResponseHandler responseHandler = new JSONResponseHandler();
 			try {
 				return mClient.execute(request, responseHandler);
 			} catch (ClientProtocolException e) {
-				Log.i("error", "client");
+				
 				e.printStackTrace();
 			} catch (IOException e) {
-				Log.i("error", "IO");
+				
 				e.printStackTrace();
 			}
 			return null;
@@ -187,14 +187,13 @@ public class HeadlinesFragment extends SherlockListFragment {
 			List<Headline> result = new ArrayList<Headline>();
 			String JSONResponse = new BasicResponseHandler()
 					.handleResponse(response);
-			Log.i("info", "starting json handler");
-			Log.i("info", JSONResponse);
+			
 			try {
 
-				Log.i("info", "Still working");
+				
 				JSONObject responseObject = (JSONObject) new JSONTokener(
 						JSONResponse).nextValue();
-				Log.i("info", "after response object");
+				
 				
 		
 				// Extract value of "list" key -- a List
@@ -223,7 +222,7 @@ public class HeadlinesFragment extends SherlockListFragment {
 					String storyLink = webLinks.getString("href");
 					//GET PUBLISHED DATE
 					String rawDate = headline.getString("published");
-					Log.i("date", rawDate);
+					
 					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 					Date date = null;
 					try {

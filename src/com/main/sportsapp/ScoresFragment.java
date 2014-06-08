@@ -101,16 +101,16 @@ public class ScoresFragment extends SherlockListFragment{
 
 		@Override
 		protected List<Game> doInBackground(Void... params) {
-			Log.i("date",todayDate);
+			
 			HttpGet request = new HttpGet(URL);
 			JSONResponseHandler responseHandler = new JSONResponseHandler();
 			try {
 				return mClient.execute(request, responseHandler);
 			} catch (ClientProtocolException e) {
-				Log.i("error", "client");
+				
 				e.printStackTrace();
 			} catch (IOException e) {
-				Log.i("error", "IO");
+				
 				e.printStackTrace();
 			}
 			return null;
@@ -213,16 +213,16 @@ public class ScoresFragment extends SherlockListFragment{
 			List<Game> result = new ArrayList<Game>();
 			String JSONResponse = new BasicResponseHandler()
 					.handleResponse(response);
-			Log.i("info", "starting json handler");
+			
 			JSONResponse = JSONResponse.replace("shsMSNBCTicker.loadGamesData(", "");
 			JSONResponse = JSONResponse.replace(");", "");
-			Log.i("info", JSONResponse);
+			
 			try {
 
-				Log.i("info", "Still working");
+				
 				JSONObject responseObject = (JSONObject) new JSONTokener(
 						JSONResponse).nextValue();
-				Log.i("info", "after response object");
+				
 				
 				String sportName = responseObject.getString("sport");
 				
@@ -236,7 +236,7 @@ public class ScoresFragment extends SherlockListFragment{
 					String xml = games.getString(idx);
 					JSONObject game = XML.toJSONObject(xml);
 					String jsonPrettyPrintString = game.toString(4);
-		            Log.i("game", jsonPrettyPrintString);
+		            
 					JSONObject entry = game.getJSONObject("ticker-entry");
 
 					//GET GAME ID
@@ -285,11 +285,11 @@ public class ScoresFragment extends SherlockListFragment{
 					if(!sport.equalsIgnoreCase("MLB")){
 						JSONObject homeLogoObject = homeTeam.getJSONObject("team-logo");
 						homeLogo = homeLogoObject.getString("link");
-						Log.i("info", homeLogo);
+						
 
 						JSONObject awayLogoObject = awayTeam.getJSONObject("team-logo");
 						awayLogo = awayLogoObject.getString("link");
-						Log.i("info", awayLogo);
+						
 					}
 
 					Integer homeScore;
@@ -300,10 +300,10 @@ public class ScoresFragment extends SherlockListFragment{
 					if(!status.equalsIgnoreCase("Pre-Game")){
 						JSONArray homeScoreArr = homeTeam.getJSONArray("score");
 						homeScore = homeScoreArr.getInt(0);
-						Log.i("scores", homeScore.toString());
+						
 						JSONArray awayScoreArr = awayTeam.getJSONArray("score");
 						awayScore = awayScoreArr.getInt(0);
-						Log.i("scores", awayScore.toString());
+						
 					}else{
 						homeScore =null;
 						awayScore = null;
@@ -317,8 +317,7 @@ public class ScoresFragment extends SherlockListFragment{
 						state = gamestate.getString("display_status2");
 					}
 
-					Log.i("state", timeElapsed);
-					Log.i("state", state);
+					
 					
 
 					

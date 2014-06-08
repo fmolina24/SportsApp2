@@ -38,8 +38,7 @@ public class SettingsFragment extends SherlockFragment {
 		        R.array.sports, android.R.layout.simple_spinner_item);
 		
 		Integer pos =adapter.getPosition(favoriteSport);
-		Log.i("settings", favoriteSport);
-		Log.i("settings", pos.toString());
+
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		
 		spinner.setAdapter(adapter);

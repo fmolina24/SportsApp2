@@ -91,8 +91,7 @@ public class GameFragment extends SherlockFragment{
 			
 		}
 		status.setText(game.getStatus());
-		
-		Log.i("info", "done with gamefrag");
+
 		new TwitterTask().execute();
 		return gameView;
 		
@@ -122,7 +121,6 @@ public class GameFragment extends SherlockFragment{
 		            
 		            for (twitter4j.Status tweet : tweets) {
 		            	myList.add(new Tweet(tweet.getUser().getScreenName(),tweet.getText(),tweet.getUser().getBiggerProfileImageURL()));
-		                Log.i("Tweet","@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
 		            }
 		            
 		            
